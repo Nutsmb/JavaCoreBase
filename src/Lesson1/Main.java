@@ -15,12 +15,12 @@ public class Main {
         System.out.println(compare(10, 20));
         System.out.println(calculate(10, 20, 6, 3));
         determine(4L);
-        System.out.println(determine_negative(2));
+        System.out.println(determineNegative(2));
         hello("Ayrat");
         leap_year(1256);
     }
 
-    public static int calculate(int a, int b, int c, int d) {
+    public static double calculate(int a, int b, int c, int d) {
         int i = a * (b + (c / d));
         return i;
     }
@@ -39,7 +39,7 @@ public class Main {
             System.out.println("Число отрицательное");
     }
 
-    public static boolean determine_negative(int a) {
+    public static boolean determineNegative(int a) {
         if (a < 0) {
             return true;
         }
