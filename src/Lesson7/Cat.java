@@ -13,13 +13,15 @@ public class Cat {
     }
 
     public void eat(Plate _plate){
-        if(!_plate.decreaseFood(this.APPETITE)){
-            hungry = true;
-            System.out.println(this.name+"'у мало еды в этой миске");
+        if(hungry) {
+            if (_plate.decreaseFood(this.APPETITE)) {
+                hungry = false;
+            } else {
+                hungry = true;
+                System.out.println(this.name + "'у мало еды в этой миске");
+                return;
+            }
         }
-        else {
-            hungry = false;
-            System.out.println(this.name+" сыт(а)");
-        }
+        System.out.println(this.name + " сыт(а)");
     }
 }
