@@ -7,7 +7,28 @@ import java.awt.event.ActionListener;
 
 public class MyWindow extends JFrame {
     public float someNumber = 0;
-    String str;
+    private static String str;
+
+    public static JButton divButton = new JButton("/");
+    public static JButton mulButton = new JButton("*");
+    public static JButton subButton = new JButton("-");
+    public static JButton addButton = new JButton("+");
+    public static JButton resultButton = new JButton("=");
+    public static JButton dotButton = new JButton(".");
+    public static JTextField inputLine = new JTextField();
+
+    public static JButton[] numberButtons = {
+            new JButton("0"),
+            new JButton("1"),
+            new JButton("2"),
+            new JButton("3"),
+            new JButton("4"),
+            new JButton("5"),
+            new JButton("6"),
+            new JButton("7"),
+            new JButton("8"),
+            new JButton("9")
+    };
 
     public MyWindow(){
 
@@ -16,6 +37,7 @@ public class MyWindow extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         creatUI(this.getContentPane());
+        setButtonsListeners();
 
         setVisible(true);
     }
@@ -29,83 +51,57 @@ public class MyWindow extends JFrame {
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.weightx = 0.5;
 
-        constraints.gridy = 1;
+        constraints.gridy = 0;
 
-        JButton divButton = new JButton("/");
         constraints.gridx = 3;
         container.add(divButton, constraints);
 
-        JButton button9 = new JButton("9");
-        constraints.gridx = 2;
-        container.add(button9, constraints);
+        // set 1-9 number buttons
+        int n = 0;
+        for (int i = 2; i >=0; i--){
+            for(int j = 0; j < 3; j++){
+                n++;
+                constraints.gridy = i;
+                constraints.gridx = j;
+                container.add(numberButtons[n], constraints);
+            }
+        }
 
-        JButton button8 = new JButton("8");
-        constraints.gridx = 1;
-        container.add(button8, constraints);
-
-        JButton button7 = new JButton("7");
-        constraints.gridx = 0;
-        container.add(button7, constraints);
-
-        constraints.gridy = 2;
-
-        JButton mulButton = new JButton("*");
+        constraints.gridy = 1;
         constraints.gridx = 3;
         container.add(mulButton, constraints);
 
-        JButton button6 = new JButton("6");
-        constraints.gridx = 2;
-        container.add(button6, constraints);
-
-        JButton button5 = new JButton("5");
-        constraints.gridx = 1;
-        container.add(button5, constraints);
-
-        JButton button4 = new JButton("4");
-        constraints.gridx = 0;
-        container.add(button4, constraints);
-
-        constraints.gridy = 3;
-
-        JButton subButton = new JButton("-");
+        constraints.gridy = 2;
         constraints.gridx = 3;
         container.add(subButton, constraints);
 
-        JButton button3 = new JButton("3");
+        constraints.gridy = 3;
+
+        constraints.gridx = 3;
+        container.add(addButton, constraints);
         constraints.gridx = 2;
-        container.add(button3, constraints);
-
-        JButton button2 = new JButton("2");
+        container.add(resultButton, constraints);
         constraints.gridx = 1;
-        container.add(button2, constraints);
-
-        JButton button1 = new JButton("1");
+        container.add(dotButton, constraints);
         constraints.gridx = 0;
-        container.add(button1, constraints);
+        container.add(numberButtons[0], constraints);
 
         constraints.gridy = 4;
 
-        JButton addButton = new JButton("+");
-        constraints.gridx = 3;
-        container.add(addButton, constraints);
-
-        JButton resultButton = new JButton("=");
-        constraints.gridx = 2;
-        container.add(resultButton, constraints);
-
-        JButton dotButton = new JButton(".");
-        constraints.gridx = 1;
-        container.add(dotButton, constraints);
-
-        JButton button0 = new JButton("0");
-        constraints.gridx = 0;
-        container.add(button0, constraints);
-
-        JTextField inputLine = new JTextField();
         constraints.ipady = 45;
         constraints.gridwidth = 4;
-        constraints.gridy = 5;
         constraints.gridx = 0;
         container.add(inputLine, constraints);
+    }
+
+    public static void setButtonsListeners(){
+        for (JButton button: numberButtons) {
+            button.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent actionEvent) {
+                    inputLine.setText(inputLine.getText() + button.getText());
+                }
+            });
+        }
     }
 }
