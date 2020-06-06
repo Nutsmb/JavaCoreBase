@@ -121,6 +121,6 @@ public class MyWindow extends JFrame {
     }
 
     public static void parseExpression(String expression){
-        
+
     }
 }
